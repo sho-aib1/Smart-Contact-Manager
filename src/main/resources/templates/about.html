@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<div th:replace="~{base::myheader}"></div>
+	<title th:text="${title}"></title>
+
+	<style>
+		.bg-primary {
+			background-color: rgb(198, 207, 220) !important;
+
+		}
+
+		.bg-primary div .m-auto a:hover {
+			color: crimson !important;
+
+		}
+	</style>
+</head>
+
+<body>
+	<div th:replace="~{base::navbar}"></div>
+
+
+
+
+	<div th:insert="~{base::foot}" style="color: rgb(255, 0, 0); font-size: larger;">
+
+	</div>
+</body>
+
+</html>

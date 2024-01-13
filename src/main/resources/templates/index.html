@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title th:text="${title}"></title>
+	    <div th:replace="~{base::myheader}"></div>
+	<style>
+		.bg-primary {
+			background-color:   ;
+
+		}
+
+		.bg-primary div .m-auto a:hover {
+			color: crimson !important;
+
+		}
+
+		.banner {
+			width: 100%;
+			height: 97vh;
+			background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../image/K1IN7zWIjFLjZzJ4Us3J.png");
+			background-size: cover;
+		}
+
+		.home-botton {
+			position: relative;
+		}
+
+		.home-botton:hover {
+			background-color: rgb(190, 234, 16);
+			/* color: black; */
+		}
+	</style>
+</head>
+
+<body>
+	<div th:replace="~{base::navbar}"></div>
+
+	<div class="banner d-flex justify-content-center align-items-center">
+		<div class="text-center text-white">
+			<h1 class="fw-bold">Smart Contact Manager</h1>
+			<p>Start Collecting your Contact in very smarter way. We provide very efficient
+				and smarter way of handling contacts.
+			</p>
+			<button class="btn  fw-bold btn-white home-botton" style="background-color: rgb(198, 207, 220);">Get
+				Start</button>
+		</div>
+	</div>
+
+
+
+
+
+	<div th:insert="~{base::foot}">
+
+	</div>
+</body>
+
+</html>

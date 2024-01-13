@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<div th:replace="~{normal/base::myheader}"></div>
+	<title th:text="${title}"></title>
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+	<script>
+		tinymce.init({
+			selector: '#mytextarea'
+		});
+		
+		$(document).ready(()=>
+		{
+			$(".item").removeClass("active");
+			$("#info-link").addClass("active");
+		}
+		);
+	</script>
+	<style>
+		.bg-primary {
+			background-color: rgb(198, 207, 220) !important;
+
+		}
+
+		.bg-primary div .m-auto a:hover {
+			color: crimson !important;
+
+		}
+
+		.car-form {
+			position: absolute;
+
+			left: 38%;
+			height: 95%;
+			width: 50%;
+		}
+
+		.my_profile_picture {
+			width: 35px;
+			height: 35px;
+			object-fit: cover;
+		}
+	</style>
+</head>
+
+<body style="background-color: ghostwhite;">
+	<div th:replace="~{normal/base::navbar}"></div>
+
+	<div th:insert="~{normal/base::content}"></div>
+
+
+	<section>
+
+		<div class="card" style="width: 70%; height: 70%; margin-left: 20%;">
+			<!--success message-->
+			<div th:if="${session.message}" th:classappend="${session.message.type}"
+				class="alert p-1 text-center lh-1 pt-1 ms-3 me-3" role="alert">
+				<p th:text="${session.message.content}"></p>
+				<th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+			</div>
+			<div style="position: relative; left: 25%;">
+				<img src="data:image/jpeg;base64,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"
+					class="img-rounded img-thumbnail h-40 w-40 m-3 " alt="Cinque Terre">
+			</div>
+			<div class="card-body">
+
+				<h2 class="card-title text-center"><span th:text="${user.name}"></span>
+				</h2>
+				<p class="card-text">
+				<div>
+					<table class="table text-center" th:object="${user}">
+						<tbody>
+							<tr>
+								<th scope="col">Email</th>
+								<td scope="col"> <span th:text="${user.email}"></span></th>
+							</tr>
+							<tr>
+								<th scope="col">Role</th>
+								<td scope="col"> <span th:text="${user.role}"></span></td>
+							</tr>
+							<tr>
+								<th scope="col">Account Active</th>
+								<td scope="col"> <span th:text="${user.enabled}"></span></td>
+							</tr>
+							<tr>
+								<th scope="col">About</th>
+								<td scope="col"> <span th:text="${user.about}"></span></td>
+							</tr>
+
+
+						</tbody>
+					</table>
+
+
+
+
+				</div>
+				</p>
+			</div>
+		</div>
+
+
+	</section>
+
+
+
+
+	<div th:insert="~{normal/base::foot}"></div>
+</body>
+
+</html>

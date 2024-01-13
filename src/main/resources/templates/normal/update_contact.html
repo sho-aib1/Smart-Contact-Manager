@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<div th:replace="~{normal/base::myheader}"></div>
+	<title th:text="${title}"></title>
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+	<script>
+		tinymce.init({
+			selector: '#mytextarea'
+		});
+	</script>
+	<style>
+		.bg-primary {
+			background-color: rgb(198, 207, 220) !important;
+
+		}
+
+		.bg-primary div .m-auto a:hover {
+			color: crimson !important;
+
+		}
+
+		.car-form {
+			position: absolute;
+
+			left: 32%;
+
+			width: 60%;
+			margin: auto;
+		}
+
+		.my_profile_picture {
+			width: 25%;
+			height: 25%;
+			object-fit: cover;
+
+		}
+	</style>
+</head>
+
+<body style="background-color: ghostwhite;">
+	<div th:replace="~{normal/base::navbar}"></div>
+
+	<div th:insert="~{normal/base::content}"></div>
+
+
+	<section>
+		<div class="card car-form">
+			<div class="card-body">
+				<h3 class="text-center">Update Contact Details</h3>
+				<form th:object="${contact}" action="#" th:action="@{'/user/process-update/'+${contact.cid}}"
+					method="POST" enctype="multipart/form-data">
+					<div class="form-group m-1 ">
+						<label for="name_field " class="fw-bold mb-2">Full Name</label>
+						<!--#fields.hasErrors('name') ? 'is-invalid': ''-->
+						<input required type="text" class="form-control" name="name" id="name_field"
+							aria-describedby="emailHelp" th:value="${contact.name}">
+					</div>
+					<div class="form-group m-1">
+						<label for="email_field" class="fw-bold mb-2">NickName</label>
+						<input required type="text" class="form-control" name="nickName" id="email_field"
+							th:value="${contact.nickName}">
+					</div>
+					<div class="form-group m-1">
+						<label for="email_field" class="fw-bold mb-2">Phone No</label>
+						<input required type="number" min="10" class="form-control" name="phno" id="email_field"
+							th:value="${contact.phno}">
+					</div>
+					<div class="form-group m-1">
+						<label for="exampleInputEmail1" class="fw-bold mb-2">Email</label>
+						<input required type="email" class="form-control" name="email" id="exampleInputEmail1"
+							aria-describedby="emailHelp" th:value="${contact.email}">
+					</div>
+					<div class="form-group m-1">
+						<label for="email_field" class="fw-bold mb-2">Work</label>
+						<input required type="text" class="form-control" name="work" id="email_field"
+							th:value="${contact.work}">
+					</div>
+
+					<div class="form-group mt-2 ps-2">
+						<label for="email_field" class="fw-bold mb-2">Contact Description</label>
+						<textarea class="form-control" id="mytextarea" name="description" rows="17"
+							th:utext="${contact.description}"></textarea>
+					</div>
+
+					<div class="container text-center">
+						<img src="" class="my_profile_picture" th:src="@{'/image/'+${contact.img}}"
+							alt="Profile Photo" />
+					</div>
+					<div class="form-group mt-2 ps-2">
+						<p class="text-secondary">Choose a new Profile Picture</p>
+						<input type="file" class="form-control" id="customFile" name="profileName"
+							 />
+					</div>
+
+
+					<div class=" mt-3 text-center">
+						<button type="submit"
+							class="btn btn-success fw-bold me-5 pe-3 ps-3 text-white hello">Update</button>
+						<button type="reset" class="btn btn-success pe-3 ps-3  fw-bold hello1">Reset</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</section>
+
+
+
+
+	<div th:insert="~{normal/base::foot}"></div>
+</body>
+
+</html>

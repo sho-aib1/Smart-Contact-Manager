@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<div th:replace="~{normal/base::myheader}"></div>
+	<title th:text="${title}"></title>
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+	<script>
+		tinymce.init({
+			selector: '#mytextarea'
+		});
+		
+		
+		$(document).ready(()=>
+		{
+			$(".item").removeClass("active");
+			$("#contact-link").addClass("active");
+		}
+		);
+		
+	</script>
+	
+	<style>
+		.bg-primary {
+			background-color: rgb(198, 207, 220) !important;
+
+		}
+
+		.bg-primary div .m-auto a:hover {
+			color: crimson !important;
+
+		}
+
+		.car-form {
+			position: absolute;
+
+			left: 38%;
+			height: 95%;
+			width: 50%;
+		}
+
+		.my_profile_picture {
+			width: 35px;
+			height: 35px;
+			object-fit: cover;
+		}
+	</style>
+</head>
+
+<body style="background-color: ghostwhite;">
+	<div th:replace="~{normal/base::navbar}"></div>
+
+	<div th:insert="~{normal/base::content}"></div>
+
+
+	<section>
+
+		<div class="card" style="width: 80%; height: 80%; margin-left: 20%;">
+			<div class="card-body">
+				<div th:if="${session.message}" th:classappend="${session.message.type}"
+					class="alert p-1 text-center lh-1 pt-1 ms-3 me-3" role="alert">
+					<p th:text="${session.message.content}"></p>
+					<th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+				</div>
+				<h2 class="card-title">Contacts Details</h2>
+				<p class="card-text">
+				<div  class="table-responsive">
+					<table class="table table-light table-hover">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Picture</th>
+								<th scope="col">Name</th>
+								<th scope="col">Email</th>
+								<th scope="col">Phone No</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="c:${contact}">
+								<th scope="row" th:text="${'SCM2023-'+c.cid}">1</th>
+								<td>
+									<img src="" class="my_profile_picture" th:src="@{'/image/'+${c.img}}"
+										alt="Profile Photo" />
+								</td>
+								<td th:text="${c.name}"></td>
+								<td>
+									<a href="" th:href="@{'/user/contact/'+${c.cid}} ">
+										<span th:text="${c.email}"></span>
+									</a>
+								</td>
+								<td th:text="${c.phno}"></td>
+								<td><a href="#" th:onclick="| deleteContact(${c.cid}) |" type="button"
+										class="btn btn-danger btn-sm">Delete</a>
+									<a th:href="@{'/user/update/'+ ${c.cid}}" type="button"
+										class="btn btn-info btn-sm">Update</a>
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>					<!--	Pagination -->
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+							<li th:if="${currentPage !=0}" class="page-item"><a class="page-link"
+									th:href="@{'/user/show-contacts/'+${currentPage-1}}">Previous</a></li>
+							<li th:classappend="${currentPage==i-1?'active':''}"
+								th:each="i: ${#numbers.sequence(1,totalPages)}" class="page-item"><a class="page-link"
+									th:href="@{'/user/show-contacts/'+${i-1}}"><span th:text="${i}"></span></a></li>
+							<li th:if="${currentPage+1 !=totalPages}" class="page-item"><a class="page-link"
+									th:href="@{'/user/show-contacts/'+${currentPage+1}}">Next</a></li>
+						</ul>
+					</nav>
+
+				</div>
+				</p>
+			</div>
+		</div>
+
+	</section>
+
+
+
+
+	<div th:insert="~{normal/base::foot}"></div>
+</body>
+
+</html>

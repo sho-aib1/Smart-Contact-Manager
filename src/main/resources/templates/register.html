@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<div th:replace="~{base::myheader}"></div>
+	<title th:text="${title}"></title>
+
+	<style>
+		.hello {
+
+			background-color: rgb(65, 41, 161);
+
+			border-color: black !important;
+
+
+		}
+
+		.hello:hover {
+			background: aliceblue !important;
+			border: 2px solid;
+			border-color: rgb(65, 41, 161);
+			color: darkslategray !important;
+		}
+
+		.hello1 {
+
+			border: 2px solid;
+			border-color: green !important;
+		}
+
+		.hello1:hover {
+			background: aliceblue !important;
+			color: darkslategray !important;
+		}
+		.bg-primary {
+			background-color: rgb(198, 207, 220) !important;
+
+		}
+
+		.bg-primary div .m-auto a:hover {
+			color: crimson !important;
+
+		}
+	</style>
+</head>
+
+<body style="background-color: aliceblue;">
+	<div th:replace="~{base::navbar}"></div>
+
+
+	<div class="container mt-3 d-flex justify-content-center align-items-center ">
+		<div class="row">
+			<div class="col-md-3 ">
+				<div class="card "
+					style="width: 30rem; height: 37rem; box-shadow: 5px 5px 5px 5px  rgb(152, 158, 226); ">
+					<!-- <img class="card-img-top" src="../image/footerdemo.png" alt="Card image cap"> -->
+					<div class="card-body">
+						<h3 class="card-title text-center">Register</h3>
+
+
+						<form th:action="@{/do_register}" th:object="${user}" method="POST">
+							<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert"
+								role="alert">
+								<p th:text="${session.message.content}"></p>
+								<th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+							</div>
+							<div class="form-group m-1 ">
+								<label for="name_field " class="fw-bold mb-2" >Full Name</label>
+								<!--#fields.hasErrors('name') ? 'is-invalid': ''-->
+								<input type="text" class="form-control" 
+								 name="name" id="name_field"
+									aria-describedby="emailHelp" placeholder="Enter Name" >
+									<!--<div class="invalid_feedback">invalid</div>-->
+							</div>
+							<div class="form-group m-1">
+								<label for="exampleInputEmail1" class="fw-bold mb-2">Email address</label>
+								<input type="email" class="form-control" name="email" id="exampleInputEmail1"
+									aria-describedby="emailHelp" placeholder="Enter email">
+								<small id="emailHelp" class="form-text text-muted">We'll never share your email with
+									anyone else.</small>
+							</div>
+							<div class="form-group m-1">
+								<label for="email_field" class="fw-bold mb-2">Password</label>
+								<input type="password" class="form-control" name="password" id="email_field"
+									placeholder="Password">
+							</div>
+							<div class="form-group mt-2 ps-2">
+
+								<textarea class="form-control" id="about_field" name="about"
+									placeholder="Enter Someting about yourself" rows="4"></textarea>
+							</div>
+							<div class="form-check m-2">
+								<input type="checkbox" class="form-check-input" name="aggreement" id="exampleCheck1">
+								<label class="form-check-label fw-bold" for="aggreement">Terms and Conditon</label>
+							</div>
+
+							<div class=" mt-3 text-center">
+								<button type="submit"
+									class="btn fw-bold me-5 pe-3 ps-3 text-white hello">Register</button>
+								<button type="reset" class="btn btn-success pe-3 ps-3  fw-bold hello1">Reset</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div th:insert="~{base.html::foot}"></div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<div th:replace="~{normal/base::myheader}"></div>
+	<title th:text="${title}"></title>
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+	<script>
+		tinymce.init({
+			selector: '#mytextarea'
+		});
+		$(document).ready(()=>
+		{
+			$(".item").removeClass("active");
+			$("#info-link").addClass("active");
+		}
+		);
+	
+	</script>
+	<style>
+		.bg-primary {
+			background-color: rgb(198, 207, 220) !important;
+
+		}
+
+		.bg-primary div .m-auto a:hover {
+			color: crimson !important;
+
+		}
+
+		.car-form {
+			position: absolute;
+
+			left: 38%;
+			height: 95%;
+			width: 50%;
+		}
+
+		.my_profile_picture {
+			width: 35px;
+			height: 35px;
+			object-fit: cover;
+		}
+	</style>
+</head>
+
+<body style="background-color: ghostwhite;">
+	<div th:replace="~{normal/base::navbar}"></div>
+
+	<div th:insert="~{normal/base::content}"></div>
+
+
+	<section>
+
+		<div class="card" style="width: 70%; height: 70%; margin-left: 20%;">
+			<!--success message-->
+<div th:if="${session.message}" th:classappend="${session.message.type}"
+					class="alert p-1 text-center lh-1 pt-1 ms-3 me-3" role="alert">
+					<p th:text="${session.message.content}"></p>
+					<th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+				</div>
+			<div style="position: relative; left: 35%;">
+				<img src="" th:src="@{'/image/'+${contact.img}}" class="img-rounded img-thumbnail h-25 w-25 m-3"
+					alt="Cinque Terre">
+			</div>
+			<div class="card-body">
+
+				<h2 class="card-title text-center"><span th:text="${contact.name +' ('+ contact.nickName+ ')' }"></span>
+				</h2>
+				<p class="card-text">
+				<div>
+					<table class="table text-center" th:object="${contact}">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">#ID</th>
+								<th scope="col"> <span th:text="${'SCM2023-'+contact.cid}"></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="col">Email</th>
+								<td scope="col"> <span th:text="${contact.email}"></span></th>
+							</tr>
+							<tr>
+								<th scope="col">Phone</th>
+								<td scope="col"> <span th:text="${contact.phno}"></span></th>
+							</tr>
+							<tr>
+								<th scope="col">Work</th>
+								<td scope="col"> <span th:text="${contact.work}"></span></td>
+							</tr>
+
+						</tbody>
+					</table>
+					<div class="text-center text-justify">
+						<span th:utext="${contact.description}"></span></span>
+					</div>
+
+					<div class="container text-center ">
+						<button href="#" th:onclick="| deleteContact(${contact.cid}) |" type="button"
+							class="btn btn-danger btn-md ps-4 pe-4 me-3">Delete</button>
+						<a  th:href="@{'/user/update/'+ ${contact.cid}}" type="button" class="btn btn-info btn-md ps-4 pe-4 ms-3" >Update</a>
+					</div>
+
+
+				</div>
+				</p>
+			</div>
+		</div>
+
+
+	</section>
+
+
+
+
+	<div th:insert="~{normal/base::foot}"></div>
+</body>
+
+</html>
